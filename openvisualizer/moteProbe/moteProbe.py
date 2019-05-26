@@ -31,6 +31,8 @@ import openvisualizer.openvisualizer_utils as u
 from   openvisualizer.moteConnector import OpenParser
 from   openvisualizer.moteConnector.SerialTester import SerialTester
 
+from openvisualizer.whisperController.WhisperSerialParser import WhisperSerialParser
+
 #============================ defines =========================================
 
 OPENTESTBED_BROKER_ADDRESS          = "argus.paris.inria.fr"
@@ -233,7 +235,8 @@ class moteProbe(threading.Thread):
         # flag to permit exit from read loop
         self.goOn                 = True
         
-        self.sendToParser         = None # to be assigned
+        self.parser = WhisperSerialParser()
+        self.sendToParser         =  self.parser.parse
         
         if self.mode == self.MODE_TESTBED:
             # initialize variable for testbedmote
@@ -348,10 +351,12 @@ class moteProbe(threading.Thread):
                                     if log.isEnabledFor(logging.DEBUG):
                                         log.debug("{0}: {2} dehdlcized input: {1}".format(self.name, u.formatStringBuf(self.inputBuf), u.formatStringBuf(tempBuf)))
                                 except OpenHdlc.HdlcException as err:
+                                    print "hdlc error"
                                     log.warning('{0}: invalid serial frame: {2} {1}'.format(self.name, err, u.formatStringBuf(tempBuf)))
                                 else:
                                     if self.sendToParser:
                                         self.sendToParser([ord(c) for c in self.inputBuf])
+                                        self.parser.parse([ord(c) for c in self.inputBuf])
                             
                             self.lastRxByte = rxByte
                         

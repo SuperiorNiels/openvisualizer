@@ -22,7 +22,7 @@ class WhisperController(eventBusClient.eventBusClient):
     def __init__(self):
         super(WhisperController, self).__init__("WhisperController", [])
 
-        self.eui = [0x14, 0x15, 0x92, 0xcc, 0x00, 0x00, 0x00, 0x00]
+        self.eui = [0x00, 0x12, 0x4b, 0x00, 0x06, 0x13, 0x00, 0x00]
 
         # give this thread a name
         self.name = 'whisper_controller'
@@ -42,9 +42,8 @@ class WhisperController(eventBusClient.eventBusClient):
         self.coap_sender = WhisperCoapSender(self.eui)
 
         self.tester = WhisperTester(self)
-        self.tester.setCommand("dio 3 2 5000 root".split(' '))
-        self.tester.setInterval(10)
-        self.tester.setTimes(5)
+        self.tester.setInterval(30)
+        self.tester.setTimes(180)
 
     def parse(self, command, serialport):
         dataToSend = self.parser.parse(command)
