@@ -25,7 +25,6 @@ def copySimfw(env, target):
     source_folders = [
         (env['FW_DIR'], 'openwsn'),
         (env['FW_DIR_WHISPER_NODE'], 'whisper_node'),
-        (env['FW_DIR_WHISPER_ROOT'], 'whisper_root'),
     ]
 
     cmdlist = []

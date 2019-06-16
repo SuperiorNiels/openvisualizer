@@ -96,15 +96,7 @@ class OpenVisualizerApp(object):
 
             self.moteProbes       = []
             for i in range(self.numMotes):
-                if i == 0:
-                    # Start a whisper root node
-                    MoteHandler.readNotifIds(
-                        os.path.join(self.datadir, 'sim_files', 'whisper_root', 'openwsnmodule_obj.h'))
-                    moteHandler = MoteHandler.MoteHandler(whisper_root.oos_openwsn.OpenMote())
-                    self.simengine.indicateNewMote(moteHandler)
-                    self.moteProbes += [moteProbe.moteProbe(emulatedMote=moteHandler)]
-                    print "Started a whisper root node"
-                elif i == 3:
+                if i == 0 or i == 3:
                     # Start a whisper node
                     MoteHandler.readNotifIds(
                         os.path.join(self.datadir, 'sim_files', 'whisper_node', 'openwsnmodule_obj.h'))
