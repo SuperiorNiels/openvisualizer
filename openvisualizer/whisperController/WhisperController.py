@@ -22,7 +22,7 @@ class WhisperController(eventBusClient.eventBusClient):
     def __init__(self):
         super(WhisperController, self).__init__("WhisperController", [])
 
-        self.eui = [0x00, 0x12, 0x4b, 0x00, 0x06, 0x13, 0x00, 0x00]
+        self.eui = [0x14, 0x15, 0x92, 0xcc, 0x00, 0x00, 0x00, 0x00]
 
         # give this thread a name
         self.name = 'whisper_controller'

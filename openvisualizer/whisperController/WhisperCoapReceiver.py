@@ -30,9 +30,10 @@ class WhisperCoapServer(coapResource.coapResource):
 
         if int(payload[0]) == WhisperDefines.WHISPER_COMMAND_SIXTOP:
             print "Received response to sixtop command"
+            print ''.join('{:02x}'.format(x) for x in payload)
             if len(Payload) > 2:
                 print "List response received"
-                # TODO: add parsing of the cells received
+                # TODO: add parsing of the received cell list
             else:
                 if int(payload[1]) == 0x00:
                     print "Success"
