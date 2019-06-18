@@ -92,7 +92,6 @@ class OpenVisualizerApp(object):
             sys.path.append(os.path.join(self.datadir, 'sim_files'))
             import openwsn.oos_openwsn
             import whisper_node.oos_openwsn
-            import whisper_root.oos_openwsn
 
             self.moteProbes       = []
             for i in range(self.numMotes):
